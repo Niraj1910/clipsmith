@@ -1,0 +1,21 @@
+{
+  "name": "clipper",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "backend",
+    "worker",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm --workspace=@clipper/backend run dev",
+    "dev:worker": "npm --workspace=@clipper/worker run dev",
+    "dev:frontend": "npm --workspace=@clipper/frontend run dev",
+    "build": "npm --workspace=@clipper/shared run build",
+    "typecheck": "npm run --workspaces --if-present typecheck",
+    "services:start": "redis-cli ping >/dev/null 2>&1 || redis-server --daemonize yes --maxmemory-policy noeviction --port 6379; mongosh --quiet --eval 'db.runCommand({ ping: 1 })' >/dev/null 2>&1 || (mkdir -p ~/.mongodb/data && GLIBC_TUNABLES='glibc.pthread.rseq=1' mongod --dbpath ~/.mongodb/data --fork --logpath ~/.mongodb/mongod.log)",
+    "services:stop": "redis-cli shutdown 2>/dev/null || true; mongosh --eval \"db.adminCommand({ shutdown: 1 })\" 2>/dev/null || true",
+    "services:status": "redis-cli ping && mongosh --eval \"db.runCommand({ ping: 1 })\""
+  }
+}

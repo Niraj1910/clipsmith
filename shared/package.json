@@ -1,0 +1,33 @@
+{
+  "name": "@clipper/shared",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./constants": {
+      "types": "./dist/constants.d.ts",
+      "import": "./dist/constants.js"
+    },
+    "./dto": {
+      "types": "./dist/dto.d.ts",
+      "import": "./dist/dto.js"
+    },
+    "./models": {
+      "types": "./dist/models/index.d.ts",
+      "import": "./dist/models/index.js"
+    },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
